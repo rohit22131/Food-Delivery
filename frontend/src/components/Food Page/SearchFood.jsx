@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import products from "../api/productApi"; // Import product data
+import products from "../data/productApi";
 import { useCart } from "../../context/CartContext"; // Import Cart Context
 
 const SearchSection = () => {

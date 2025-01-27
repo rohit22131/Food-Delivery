@@ -10,17 +10,8 @@ const PaymentPage = () => {
     expirationDate: "",
     cvv: "",
   });
-  const [orderDetails, setOrderDetails] = useState(null); // State to hold the order details
 
   const navigate = useNavigate(); // Initialize useNavigate
-  const location = useLocation(); // Use location to get state passed from Order Summary
-
-  // Get order details from the Order Summary page
-  useEffect(() => {
-    if (location.state) {
-      setOrderDetails(location.state.orderDetails);
-    }
-  }, [location.state]);
 
   const getTotalPrice = () =>
     cart.reduce((total, item) => total + item.price * item.quantity, 0);

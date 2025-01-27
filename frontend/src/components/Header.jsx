@@ -22,8 +22,8 @@ function Header() {
           Foodify
         </Link>
 
-        {/* Navigation Links (Visible on Medium and Larger Screens) */}
-        <ul className="lg:flex lg:space-x-12 text-gray-600 hidden mx-auto">
+        {/* Navigation Links (Centered on Large Screens) */}
+        <ul className="lg:flex lg:space-x-12 text-gray-600 hidden flex-grow lg:justify-center">
           <Link to="/">
             <li className="hover:text-orange-700 font-bold cursor-pointer">Menu</li>
           </Link>
@@ -36,7 +36,38 @@ function Header() {
           <li className="hover:text-orange-700 font-bold cursor-pointer">Contact</li>
         </ul>
 
-        {/* Right-side Buttons for Small Screens */}
+        {/* Right-side Buttons for Large Screens */}
+        <div className="lg:flex lg:space-x-4 lg:ml-auto hidden items-center">
+          {/* Login/Logout Button */}
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className="bg-red-600 text-white text-sm sm:text-base px-3 sm:px-4 py-1 sm:py-2 rounded-lg shadow hover:bg-red-500 cursor-pointer"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link to="/login">
+              <button className="bg-orange-600 text-white text-sm sm:text-base px-3 sm:px-4 py-1 sm:py-2 rounded-lg shadow hover:bg-orange-500 cursor-pointer">
+                Login/SignUp
+              </button>
+            </Link>
+          )}
+
+          {/* Order History Button (only shown if user is logged in) */}
+          {isLoggedIn && username && (
+            <button
+              onClick={() => {
+                navigate("/order-history");
+              }}
+              className="text-red-600 px-2 py-1.5 border-2 rounded-lg shadow hover:bg-red-600 hover:text-white"
+            >
+              Order History
+            </button>
+          )}
+        </div>
+
+        {/* Hamburger Menu for Small Screens */}
         <div className="flex lg:hidden items-center space-x-2">
           {/* Login/Logout Button */}
           {isLoggedIn ? (
@@ -54,7 +85,7 @@ function Header() {
             </Link>
           )}
 
-          {/* Hamburger Menu (Shifted to Right) */}
+          {/* Hamburger Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-gray-600 hover:text-orange-700 focus:outline-none"
